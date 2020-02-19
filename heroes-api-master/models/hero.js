@@ -32,7 +32,8 @@ const heroSchema = new mongoose.Schema({
         enum: ["invisibility", "barking", "Flying"] //validation of the superpower type. we use enum only to use
     },
 
-    movies: [String]
+    movies: [String],
+    image: [imageUrl]
 });
 
 const Hero = mongoose.model("Hero", heroSchema)

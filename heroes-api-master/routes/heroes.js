@@ -1,7 +1,9 @@
 const express = require("express");
 const Hero = require("../models/hero");
 const router = express.Router();
+const jwt = require("jsonwebtoken");
 
+const SECRET_KEY = "12345678";
 // var heroesArray = [
 //   {
 //     id: 1,
@@ -76,6 +78,20 @@ router.get("/:heroId", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
+
+  //check token is request headaer and see if the token is valid or not
+  const token = req.header("x-jwt-token");
+  if(!token){
+    return res.status(401).send("Access denied!");
+  }
+
+  try{
+    jwt.verify(token, SECRET_KEY);
+  } catch(e){
+    res.send(400).send("Invalid token!");
+  }
+ 
+
  /* if (!req.body.name) {
     return res.status(400).send("Please check request again!");
   }*/

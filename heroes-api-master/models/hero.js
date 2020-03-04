@@ -33,7 +33,6 @@ const heroSchema = new mongoose.Schema({
     },
 
     movies: [String],
-    image: [imageUrl]
 });
 
 const Hero = mongoose.model("Hero", heroSchema)

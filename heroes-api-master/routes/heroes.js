@@ -38,7 +38,7 @@ const router = express.Router();
 //you  can sort data which is receiving
 router.get("/", async (req, res) => {
   try{
-  let heros = await Hero.find({name: /^Cap/ })
+  let heros = await Hero.find()
   //.sort({ name: "asc"})
   // .limit(5)
   // .select({ name: 1, deceased:1 });
@@ -48,6 +48,7 @@ router.get("/", async (req, res) => {
     return res.status(500).send(ex.message);
   }
 });
+
 
 //Find from the heroId with mongodb
 router.get("/:heroId", async (req, res) => {
@@ -89,11 +90,12 @@ try{
     likeCount : req.body.likeCount,
     superPowers : req.body.superPowers,
     movies : req.body.movies,
-    image: req.body.imageUrl
+    imageUrl : req.body.imageUrl
 
     });
 
   heroAdd = await heroAdd.save();
+
   res.send(heroAdd);
   }
   catch(ex) //
